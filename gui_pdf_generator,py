@@ -27,6 +27,7 @@ def generate_pdf(html_content, output_pdf_path):
 def generate_pdf_gui(html_content, output_pdf_path_var):
     # Create a Tkinter window for the GUI
     root = tk.Tk()
+    root.title("PDF Creator")  # Set window title
 
     # Create a StringVar for output PDF path
     output_pdf_path_var = tk.StringVar()
