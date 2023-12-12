@@ -4,6 +4,10 @@ from pathlib import Path
 
 
 def generate_pdf(html_content, output_pdf_path):
+    if not html_content:
+        print("HTML content is empty. Please provide HTML content.")
+        return
+
     # If the file already exists, add a suffix to the name
     pdf_path = Path(output_pdf_path)
     pdf_name = pdf_path.stem  # Get the filename without extension
