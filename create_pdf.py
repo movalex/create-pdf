@@ -6,10 +6,22 @@ from tkinter import Text, Scrollbar, Button, Entry
 
 
 def generate_pdf(html_content, output_pdf_path):
-    # Generate the PDF
-    weasyprint.HTML(string=html_content).write_pdf(output_pdf_path)
+    # If the file already exists, add a suffix to the name
+    pdf_path = Path(output_pdf_path)
+    pdf_name = pdf_path.stem  # Get the filename without extension
+    pdf_dir = pdf_path.parent
+    pdf_extension = pdf_path.suffix
 
-    print(f"PDF created and saved at {output_pdf_path}")
+    count = 1
+    while pdf_path.exists():
+        pdf_name = f"{pdf_name}_{count}"
+        pdf_path = pdf_dir / f"{pdf_name}{pdf_extension}"
+        count += 1
+
+    # Generate the PDF
+    weasyprint.HTML(string=html_content).write_pdf(pdf_path)
+
+    print(f"PDF created and saved at {pdf_path}")
 
 
 def generate_pdf_gui(html_content, output_pdf_path_var):
